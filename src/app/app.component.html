@@ -1,0 +1,92 @@
+<div class="example-container">
+  <div class="genAI-wrapper">
+    <div class="GenAI-logo">
+    <!-- <div>GenAI Assistant</div> -->
+    <mat-grid-list cols="12" rowHeight="100px">
+        <mat-grid-tile
+          [colspan]="2"
+          [rowspan]="1"
+          ><img src="../assets/Image/mercklogo.png" alt="" width="100px" height="70px"></mat-grid-tile>
+        
+          <mat-grid-tile
+          [colspan]="2"
+          [rowspan]="1"
+          >GenAI Assistant</mat-grid-tile>
+
+    </mat-grid-list>
+    </div>
+  </div>
+<div class="container-fluid">
+  <div class="row">
+  <div class="col-sm-8 col-md-8 col-lg-8 col12">
+<div class="question-asked" [ngClass]="{'highlight': query && query.length>0 }" *ngIf="query && query.length>0">
+  <p>{{query}}</p>
+</div>
+
+<div class="sqlquery-wrapper" [ngClass]="{'sqlquery-style': sqlData.length > 0}">
+  <div *ngIf="sqlData.length > 0">
+    {{sqlData}}
+  </div>
+</div>
+
+<div class="stringResponse" [ngClass]="{'response': queryResp && queryResp.length>0 }" *ngIf="queryResp && queryResp.length>0">
+  <div class="responseText">{{queryResp}}</div>
+</div>
+
+
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<!-- <div *ngIf="!isString"> -->
+<!-- <app-table-component *ngIf="!isString" [data]="data" [displayedColumns]="displayedColumns"></app-table-component> -->
+<div class="table-wrapper" *ngIf="isTableData">
+  <mat-table [dataSource]="data" class="table-data mat-elevation-z8">
+  
+      <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+        <mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+      </ng-container>
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    
+    <mat-paginator #paginator *ngIf="data"
+    [pageSize]="25"
+    [pageSizeOptions]="[5, 10, 20]" [hidePageSize]="hidePageSize" showFirstLastButtons>
+      </mat-paginator>
+  </div>
+<!-- </div> -->
+
+
+<div>
+  <!-- <form class="example-form" [ngClass]="{'example-form-update': (queryResp && queryResp.length>0)|| (data && data.length>0)}" (keydown.enter)="preventSubmission()"> -->
+  <form class="example-form" [ngClass]="{'example-form-update': (isTableData)}" (keydown.enter)="preventSubmission()">
+    <mat-form-field class="example-full-width">
+      <input matInput minlength="10" #message (keyup.enter)="setQuery()" placeholder="Enter a prompt. Be as specific as you can.">
+    </mat-form-field>
+  </form>
+</div>
+
+</div>
+
+<!-- <div class="col-sm-4 col-md-4 col-lg-4 col12" *ngIf="(queryResp && queryResp.length > 0) || data && data.length > 0">
+  <div class="sqlqueryheading col-sm-12 col-md-12 col-lg-12 col12">
+    SQL Query
+  </div>
+  <div class="sqlquery-wrapper col-sm-12 col-md-12 col-lg-12 col12">
+    <div *ngIf="sqlData.length > 0">
+      {{sqlData}}
+    </div>
+    <div *ngIf="sqlData.length < 1">
+      No SQL Query Available
+    </div>
+  </div>
+</div> -->
+</div>
+
+</div>
+
+
+
+<div id="watson-assistant-chat-container"></div>
+</div>

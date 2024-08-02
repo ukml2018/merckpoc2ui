@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "http://169.63.181.214:5000/",
+      "secure": false,
+      // "logLevel": "debug",
+      "changeOrigin": true
+    }
+  } 
