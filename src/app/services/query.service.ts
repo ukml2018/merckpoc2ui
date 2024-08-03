@@ -11,7 +11,7 @@ export class QueryService {
 
     }
     
-    url = 'http://169.63.181.214:5000/invokesearch/';
+    url = 'https://merckpoc2-microservice.1g6wvc9yqptt.us-east.codeengine.appdomain.cloud/invokesearch/';
 
 
     callConverse(query:string) {
